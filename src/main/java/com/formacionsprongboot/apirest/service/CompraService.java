@@ -1,5 +1,6 @@
 package com.formacionsprongboot.apirest.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.formacionsprongboot.apirest.entity.Compra;
@@ -13,4 +14,6 @@ public interface CompraService {
 	public Compra save(Compra cliente);
 	
 	//public void delete(Long id);
+	
+	public List<Compra> findByFecha(java.util.Date date);
 }

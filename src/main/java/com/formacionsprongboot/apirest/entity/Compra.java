@@ -105,6 +105,4 @@ public class Compra implements Serializable {
 		this.unidades = unidades;
 	}
 
-	/** */
-	private static final long serialVersionUID = 1L;
 }

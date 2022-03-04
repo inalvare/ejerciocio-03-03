@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -210,27 +211,29 @@ public class ClienteController {
 		
 	}
 	
-	@GetMapping("/nombreClientes")
-	public ResponseEntity<?>  findClienteById(@RequestBody String nombre) {
-		Optional<Cliente> cliente = null;
-		Map<String, Object> response = new HashMap<>();
-		
-		try {
-			cliente=servicio.FinByNombre(nombre);
-			
-		} catch (DataAccessException e) {
-			response.put("mensaje", "Error al realizar consulta a base de datos");
-			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-			
-			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		
-		if(cliente == null) {
-			response.put("mensaje", "La cliente no existe en la base de datos");
-			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.NOT_FOUND);
-		}
-		response.put("cliente", cliente);
-		return new ResponseEntity<Cliente>(HttpStatus.OK);
+	@GetMapping("/nombreClientes/{nombre}")
+	public List<Cliente>  findClienteById(@PathVariable String nombre) {
+		return servicio.FinByNombre(nombre);
+//		List<Cliente> cliente = null;
+//		
+//		Map<String, Object> response = new HashMap<>();
+//		response.put("cliente", cliente);
+//		try {
+//			cliente=servicio.FinByNombre(nombre);
+//			
+//		} catch (DataAccessException e) {
+//			response.put("mensaje", "Error al realizar consulta a base de datos");
+//			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+//			
+//			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
+//		}
+//		
+//		if(cliente == null) {
+//			response.put("mensaje", "La cliente no existe en la base de datos");
+//			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.NOT_FOUND);
+//		}
+//		response.put("cliente", cliente);
+//		return new ResponseEntity<Cliente>(HttpStatus.OK);
 		
 	}
 }

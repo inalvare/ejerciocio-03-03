@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.formacionsprongboot.apirest.dao.ArticuloDao;
 import com.formacionsprongboot.apirest.entity.Articulo;
+import com.formacionsprongboot.apirest.entity.Cliente;
 
 
 @Service
@@ -38,6 +40,13 @@ public class ArticuloServiceImpl implements ArticuloService{
 
 		AccesoDb.deleteById(id);
 		
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<Articulo> FindByNombre(String nombre) {
+		
+		return AccesoDb.findByNombre(nombre);
 	}
 
 }

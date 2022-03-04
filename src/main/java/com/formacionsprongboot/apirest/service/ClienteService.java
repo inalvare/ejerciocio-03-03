@@ -16,6 +16,6 @@ public interface ClienteService {
 	
 	public void Delete(Long id);
 
-	public Optional<Cliente> FinByNombre(String nombre);
+	public List<Cliente> FinByNombre(String nombre);
 
 }

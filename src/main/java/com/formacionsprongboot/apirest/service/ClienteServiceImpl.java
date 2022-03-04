@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.formacionsprongboot.apirest.dao.ClienteDao;
 import com.formacionsprongboot.apirest.entity.Cliente;
@@ -40,7 +41,8 @@ public class ClienteServiceImpl implements ClienteService{
 	}
 
 	@Override
-	public Optional<Cliente> FinByNombre(String nombre) {
+	@Transactional(readOnly=true)
+	public List<Cliente> FinByNombre(String nombre) {
 		
 		return AccesoDb.findByNombre(nombre);		
 	}
